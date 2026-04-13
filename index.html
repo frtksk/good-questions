@@ -28,6 +28,7 @@
   .btn-next { display: flex; align-items: center; gap: 0.6rem; background: var(--ink); color: var(--paper); border: none; padding: 0.9rem 1.6rem; font-family: 'Shippori Mincho', serif; font-size: 0.8rem; letter-spacing: 0.15em; cursor: pointer; transition: background 0.2s, transform 0.1s; position: relative; overflow: hidden; }
   .btn-next::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   .btn-next:hover::after { transform: scaleX(1); }
+  .btn-next:not(:hover)::after { transform: scaleX(0); }
   .btn-next:active { transform: scale(0.97); }
   .btn-next span { position: relative; z-index: 1; }
   .btn-next svg { position: relative; z-index: 1; transition: transform 0.2s; }
