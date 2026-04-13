@@ -61,21 +61,21 @@
 <div class="mode-wrap" id="modeWrap">
   <div class="mode-title">
     <h1>Good Questions</h1>
-    <p>深さを選んでください</p>
+
   </div>
   <div class="mode-options">
     <button class="mode-btn" onclick="startGame('light')">
-      <span class="mode-btn-label">ライト</span>
+      <span class="mode-btn-label">★</span>
       <span class="mode-btn-desc">答えやすい、自己開示は少なめ</span>
       <span class="mode-btn-dot"></span>
     </button>
     <button class="mode-btn" onclick="startGame('standard')">
-      <span class="mode-btn-label">スタンダード</span>
+      <span class="mode-btn-label">★★</span>
       <span class="mode-btn-desc">価値観・選択・振り返り</span>
       <span class="mode-btn-dot"></span>
     </button>
     <button class="mode-btn" onclick="startGame('deep')">
-      <span class="mode-btn-label">ディープ</span>
+      <span class="mode-btn-label">★★★</span>
       <span class="mode-btn-desc">本音、後悔、これからの話</span>
       <span class="mode-btn-dot"></span>
     </button>
@@ -162,7 +162,7 @@ function startGame(mode) {
   document.getElementById('modeWrap').classList.add('hidden');
   document.getElementById('cardWrap').classList.remove('hidden');
   document.getElementById('bottomBar').style.display = 'flex';
-  const labels = { light: 'ライト', standard: 'スタンダード', deep: 'ディープ' };
+  const labels = { light: '★', standard: '★★', deep: '★★★' };
   document.getElementById('cardLabel').textContent = labels[mode];
   showQuestion();
 }
