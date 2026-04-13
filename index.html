@@ -29,7 +29,7 @@
   .btn-next::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   .btn-next:hover::after { transform: scaleX(1); }
   .btn-next:not(:hover)::after { transform: scaleX(0); }
-  @media (hover: none) { .btn-next::after { display: none; } }
+  @media (hover: none) { .btn-next:active::after { transform: scaleX(1); } .btn-next:not(:active)::after { transform: scaleX(0); } }
   .btn-next:active { transform: scale(0.97); }
   .btn-next span { position: relative; z-index: 1; }
   .btn-next svg { position: relative; z-index: 1; transition: transform 0.2s; }
