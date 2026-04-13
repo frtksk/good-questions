@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="ja"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;Good Questions&lt;/title&gt;</p>
+<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root { --ink: #1a1714; --paper: #f5f0e8; --muted: #9a9186; --accent: #c8401a; --line: #d8d0c4; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>html, body { height: 100%; background: var(--paper); color: var(--ink); font-family: 'Shippori Mincho', serif; overflow: hidden; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 2rem; position: relative; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header { position: fixed; top: 0; left: 0; right: 0; padding: 1.5rem 2.5rem; display: flex; align-items: baseline; gap: 0.75rem; z-index: 10; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header-title { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.1rem; letter-spacing: 0.02em; color: var(--ink); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header-counter { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--muted); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 20; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-wrap { position: relative; width: 100%; max-width: 520px; z-index: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card { position: relative; padding: 3.5rem 3rem; background: transparent; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card::before, .card::after { content: ''; position: absolute; background: var(--ink); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card::before { top: 0; left: 0; right: 0; height: 1.5px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card::after { bottom: 0; left: 0; right: 0; height: 1px; background: var(--line); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; display: block; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-text { font-size: clamp(1.35rem, 4vw, 1.75rem); line-height: 1.7; font-weight: 500; letter-spacing: 0.03em; color: var(--ink); min-height: 4em; display: flex; align-items: center; opacity: 1; transform: translateY(0); transition: opacity 0.3s ease, transform 0.3s ease; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-text.exit { opacity: 0; transform: translateY(-12px); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-text.enter { opacity: 0; transform: translateY(12px); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.bottom { position: fixed; bottom: 0; left: 0; right: 0; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; z-index: 10; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-next { display: flex; align-items: center; gap: 0.6rem; background: var(--ink); color: var(--paper); border: none; padding: 0.9rem 1.6rem; font-family: 'Shippori Mincho', serif; font-size: 0.8rem; letter-spacing: 0.15em; cursor: pointer; transition: background 0.2s, transform 0.1s; position: relative; overflow: hidden; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-next::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-next:hover::after { transform: scaleX(1); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-next:active { transform: scale(0.97); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-next span { position: relative; z-index: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-next svg { position: relative; z-index: 1; transition: transform 0.2s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-next:hover svg { transform: translateX(3px); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-pass { background: none; border: none; font-family: 'Shippori Mincho', serif; font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); cursor: pointer; padding: 0.5rem; transition: color 0.2s; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-pass:hover { color: var(--ink); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finish { display: none; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; z-index: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finish.visible { display: flex; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card-wrap.hidden { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finish-mark { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 3rem; color: var(--accent); line-height: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finish-text { font-size: 0.85rem; letter-spacing: 0.1em; color: var(--muted); line-height: 1.8; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-restart { margin-top: 1rem; background: none; border: 1px solid var(--ink); font-family: 'Shippori Mincho', serif; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--ink); padding: 0.8rem 1.8rem; cursor: pointer; transition: background 0.2s, color 0.2s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-restart:hover { background: var(--ink); color: var(--paper); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-wrap { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--paper); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3rem; z-index: 100; padding: 2rem; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-wrap.hidden { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-title { text-align: center; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-title h1 { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1; margin-bottom: 0.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-title p { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--muted); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-options { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; max-width: 340px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-btn { background: none; border: 1px solid var(--line); font-family: 'Shippori Mincho', serif; padding: 1.1rem 1.5rem; cursor: pointer; text-align: left; transition: border-color 0.2s, background 0.2s; position: relative; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-btn:hover { border-color: var(--ink); background: rgba(26,23,20,0.03); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-btn-label { font-size: 0.85rem; letter-spacing: 0.1em; color: var(--ink); display: block; margin-bottom: 0.25rem; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-btn-desc { font-size: 0.7rem; letter-spacing: 0.05em; color: var(--muted); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-btn-dot { position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: background 0.2s; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-btn:hover .mode-btn-dot { background: var(--accent); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>@media (max-width: 480px) { .card { padding: 2.5rem 1.75rem; } .bottom { padding: 1.5rem; } .header { padding: 1.25rem 1.5rem; } }</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div class="progress-bar" id="progressBar"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;div class="mode-wrap" id="modeWrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="mode-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Good Questions&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;深さを選んでください&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="mode-options"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="mode-btn" onclick="startGame('light')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-label"&gt;ライト&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-desc"&gt;答えやすい、自己開示は少なめ&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-dot"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="mode-btn" onclick="startGame('standard')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-label"&gt;スタンダード&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-desc"&gt;価値観・選択・振り返り&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-dot"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="mode-btn" onclick="startGame('deep')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-label"&gt;ディープ&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-desc"&gt;本音、後悔、これからの話&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="mode-btn-dot"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span class="header-title"&gt;Good Questions&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span class="header-counter" id="counter"&gt;&lt;/span&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">&lt;div class="card-wrap hidden" id="cardWrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="card-label" id="cardLabel"&gt;question&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="question-text" id="questionText"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">&lt;div class="finish" id="finish"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="finish-mark"&gt;—&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p class="finish-text"&gt;すべての問いが終わりました。&lt;br&gt;続きは、あなたたちの言葉で。&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="btn-restart" onclick="resetGame()"&gt;もう一度&lt;/button&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">&lt;div class="bottom" id="bottomBar" style="display:none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="btn-pass" onclick="nextQuestion(true)"&gt;スキップ&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="btn-next" onclick="nextQuestion(false)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span&gt;次の問いへ&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;svg width="14" height="14" viewBox="0 0 14 14" fill="none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/button&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const questions = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>light: [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"最近、時間を忘れた瞬間はあった？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"子どものころ、なりたかったものは何だった？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"ひとりのとき、何をしていることが多い？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"最近、誰かに教えてもらったことで、よかったと思うことは？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"旅先で、一番記憶に残っている場所はどこ？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"いま、密かに気になっていることや、はまっていることはある？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"自分の中で「これは得意だな」と思うことは？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"最近、笑ったのはどんなとき？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"好きな食べ物に、人柄が出ると思う？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"もう一度体験したい、過去の「一日」はある？",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>standard: [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"やめたことで、よかったと思っていることは？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"自分が変わったと気づいたのは、どんな瞬間だった？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"いまの仕事や生活を、続けている一番の理由は何だと思う？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"お金でも時間でもなく、何が足りていないと感じる？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"「これは譲れない」と思っていることは？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"10年前の自分が見たら、驚くことは何だと思う？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"最近、自分に正直にできていると思う？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"もう一度やり直せるとしたら、変える？変えない？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"誰かに影響を受けて、変わったことがある？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"いまの自分を一言で言うとしたら、何と言う？",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>deep: [</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"5年後の自分に、いま何を報告したい？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"いま一番、避けていることは何？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"誰かに言えていない「ありがとう」がある？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"最近、正直に話せていないことがある？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"自分の「ここは変われていないな」と思うところは？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"後悔している選択と、後悔していない選択。どちらが多い？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"いまの自分は、なりたかった自分に近い？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"10年後、どんな状態だったら「うまくいった」と思える？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"だれかに「ごめん」と言えていないことがある？",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>"死ぬ前に、やっておきたいことがあるとしたら？",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>]</p>
+<p class="p1">};</p>
+<p class="p1">let currentMode = null;</p>
+<p class="p1">let pool = [];</p>
+<p class="p1">let currentIndex = 0;</p>
+<p class="p1">function shuffle(arr) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const a = [...arr];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for (let i = a.length - 1; i &gt; 0; i--) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const j = Math.floor(Math.random() * (i + 1));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>[a[i], a[j]] = [a[j], a[i]];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return a;</p>
+<p class="p1">}</p>
+<p class="p1">function startGame(mode) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>currentMode = mode;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pool = shuffle(questions[mode]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>currentIndex = 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('modeWrap').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('cardWrap').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('bottomBar').style.display = 'flex';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const labels = { light: 'ライト', standard: 'スタンダード', deep: 'ディープ' };</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('cardLabel').textContent = labels[mode];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>showQuestion();</p>
+<p class="p1">}</p>
+<p class="p1">function showQuestion() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const text = document.getElementById('questionText');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const counter = document.getElementById('counter');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const bar = document.getElementById('progressBar');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>counter.textContent = `${currentIndex + 1} / ${pool.length}`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>bar.style.width = `${((currentIndex) / pool.length) * 100}%`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text.textContent = pool[currentIndex];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text.classList.remove('exit', 'enter');</p>
+<p class="p1">}</p>
+<p class="p1">function nextQuestion(skip) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const text = document.getElementById('questionText');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text.classList.add('exit');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>currentIndex++;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (currentIndex &gt;= pool.length) { showFinish(); return; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('progressBar').style.width = `${((currentIndex) / pool.length) * 100}%`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('counter').textContent = `${currentIndex + 1} / ${pool.length}`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text.textContent = pool[currentIndex];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text.classList.remove('exit');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text.classList.add('enter');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setTimeout(() =&gt; text.classList.remove('enter'), 50);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, 280);</p>
+<p class="p1">}</p>
+<p class="p1">function showFinish() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('progressBar').style.width = '100%';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('cardWrap').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('bottomBar').style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('counter').textContent = '';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('finish').classList.add('visible');</p>
+<p class="p1">}</p>
+<p class="p1">function resetGame() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('finish').classList.remove('visible');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('modeWrap').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('progressBar').style.width = '0%';</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
