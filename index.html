@@ -25,17 +25,16 @@
   .question-text.exit { opacity: 0; transform: translateY(-12px); }
   .question-text.enter { opacity: 0; transform: translateY(12px); }
   .bottom { position: fixed; bottom: 0; left: 0; right: 0; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: flex-end; z-index: 10; }
-  .btn-next { display: flex; align-items: center; gap: 0.6rem; background: var(--ink); color: var(--paper); border: none; padding: 0.9rem 1.6rem; font-family: 'Shippori Mincho', serif; font-size: 0.8rem; letter-spacing: 0.15em; cursor: pointer; transition: background 0.2s, transform 0.1s; position: relative; overflow: hidden; }
+  .btn-next { display: flex; align-items: center; gap: 0.6rem; background: var(--ink); color: var(--paper); border: none; padding: 0.9rem 1.6rem; font-family: 'Shippori Mincho', serif; font-size: 0.8rem; letter-spacing: 0.15em; cursor: pointer; position: relative; overflow: hidden; }
   .btn-next::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   .btn-next:hover::after { transform: scaleX(1); }
   .btn-next:not(:hover)::after { transform: scaleX(0); }
-  @media (hover: none) { .btn-next::after { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); } .btn-next:active::after { transform: scaleX(1); } }
+  .btn-next.tapped::after { transform: scaleX(1); transition: transform 0.15s ease; }
+  .btn-next:not(.tapped)::after { transform: scaleX(0); transition: transform 0.15s ease 0.15s; }
   .btn-next:active { transform: scale(0.97); }
   .btn-next span { position: relative; z-index: 1; }
   .btn-next svg { position: relative; z-index: 1; transition: transform 0.2s; }
   .btn-next:hover svg { transform: translateX(3px); }
-  .btn-pass { background: none; border: none; font-family: 'Shippori Mincho', serif; font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); cursor: pointer; padding: 0.5rem; transition: color 0.2s; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
-  .btn-pass:hover { color: var(--ink); }
   .finish { display: none; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; z-index: 1; }
   .finish.visible { display: flex; }
   .card-wrap.hidden { display: none; }
@@ -47,7 +46,6 @@
   .mode-wrap.hidden { display: none; }
   .mode-title { text-align: center; }
   .mode-title h1 { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1; margin-bottom: 0.5rem; }
-  .mode-title p { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--muted); }
   .mode-options { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; max-width: 340px; }
   .mode-btn { background: none; border: 1px solid var(--line); font-family: 'Shippori Mincho', serif; padding: 1.1rem 1.5rem; cursor: pointer; text-align: left; transition: border-color 0.2s, background 0.2s; position: relative; }
   .mode-btn:hover { border-color: var(--ink); background: rgba(26,23,20,0.03); }
@@ -63,7 +61,6 @@
 <div class="mode-wrap" id="modeWrap">
   <div class="mode-title">
     <h1>Good Questions</h1>
-
   </div>
   <div class="mode-options">
     <button class="mode-btn" onclick="startGame('light')">
@@ -99,8 +96,7 @@
   <button class="btn-restart" onclick="resetGame()">もう一度</button>
 </div>
 <div class="bottom" id="bottomBar" style="display:none">
-
-  <button class="btn-next" onclick="nextQuestion(false)">
+  <button class="btn-next" onclick="nextQuestion()">
     <span>次の問いへ</span>
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
       <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -237,11 +233,11 @@ function showQuestion() {
   text.textContent = pool[currentIndex];
   text.classList.remove('exit', 'enter');
 }
-function nextQuestion(skip) {
+function nextQuestion() {
+  const text = document.getElementById('questionText');
   const btn = document.querySelector('.btn-next');
   btn.classList.add('tapped');
-  setTimeout(() => btn.classList.remove('tapped'), 400);
-  const text = document.getElementById('questionText');
+  setTimeout(() => btn.classList.remove('tapped'), 300);
   text.classList.add('exit');
   setTimeout(() => {
     currentIndex++;
