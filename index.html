@@ -24,7 +24,7 @@
   .question-text { font-size: clamp(1.35rem, 4vw, 1.75rem); line-height: 1.7; font-weight: 500; letter-spacing: 0.03em; color: var(--ink); min-height: 4em; display: flex; align-items: center; opacity: 1; transform: translateY(0); transition: opacity 0.3s ease, transform 0.3s ease; }
   .question-text.exit { opacity: 0; transform: translateY(-12px); }
   .question-text.enter { opacity: 0; transform: translateY(12px); }
-  .bottom { position: fixed; bottom: 0; left: 0; right: 0; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; z-index: 10; }
+  .bottom { position: fixed; bottom: 0; left: 0; right: 0; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: flex-end; z-index: 10; }
   .btn-next { display: flex; align-items: center; gap: 0.6rem; background: var(--ink); color: var(--paper); border: none; padding: 0.9rem 1.6rem; font-family: 'Shippori Mincho', serif; font-size: 0.8rem; letter-spacing: 0.15em; cursor: pointer; transition: background 0.2s, transform 0.1s; position: relative; overflow: hidden; }
   .btn-next::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   .btn-next:hover::after { transform: scaleX(1); }
