@@ -238,6 +238,9 @@ function showQuestion() {
   text.classList.remove('exit', 'enter');
 }
 function nextQuestion(skip) {
+  const btn = document.querySelector('.btn-next');
+  btn.classList.add('tapped');
+  setTimeout(() => btn.classList.remove('tapped'), 400);
   const text = document.getElementById('questionText');
   text.classList.add('exit');
   setTimeout(() => {
